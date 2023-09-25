@@ -9,5 +9,6 @@ router.get('/', handlers.getAll)
 router.get('/:id', blogFinder, handlers.getById)
 router.post('/', handlers.create)
 router.delete('/:id', blogFinder, handlers.destroy)
+router.put('/:id', blogFinder, handlers.update)
 
 export default router

@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
-import Blog from "./Blog";
+import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
 
 const getAll = async (req: Request, res: Response) => {
-  const blogs = await Blog.findAll({})
+  const blogs = await blogsServices.getAll()
 
   res.json(blogs);
 }
@@ -17,13 +17,15 @@ const getById = async (req: RequestWithBlog, res: Response) => {
   }
 }
 
-const create = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const blog = await Blog.create(req.body)
+    const body = req.body
+
+    const blog = await blogsServices.create(body)
 
     return res.json(blog)
   } catch (error) {
-    return res.status(400).json({ error })
+    next(error)
   }
 }
 
@@ -35,4 +37,16 @@ const destroy = async (req: RequestWithBlog, res: Response) => {
   res.status(204).end()
 }
 
-export default { create, destroy, getAll, getById }
+const update = async (req: RequestWithBlog, res: Response) => {
+  if (req.blog) {
+    req.blog.likes = Number(req.body.likes)
+
+    await req.blog.save()
+
+    res.json(req.blog)
+  } else {
+    res.status(404).end()
+  }
+}
+
+export default { create, destroy, getAll, getById, update }

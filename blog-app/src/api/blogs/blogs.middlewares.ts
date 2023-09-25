@@ -1,12 +1,21 @@
 import { Response, NextFunction } from "express";
 
-import Blog from "./Blog";
+import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
+import { parseId } from './blogs.utils'
 
 export const blogFinder = async (req: RequestWithBlog, res: Response, next: NextFunction) => {
-  const id = Number(req.params.id)
+  try {
+    const id = parseId(req.params.id)
 
-  req.blog = await Blog.findByPk(id)
-
-  next()
+    const blog = await blogsServices.getById(id)
+  
+    if (blog) {
+      req.blog = blog
+    }
+  
+    next()
+  } catch (error) {
+    next(error)
+  }
 }
