@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
-import Blog from "./blogs";
+import Blog from "./Blog";
+import { RequestWithBlog } from "./blogs.types";
 
 const getAll = async (req: Request, res: Response) => {
   const blogs = await Blog.findAll({})
@@ -8,11 +9,9 @@ const getAll = async (req: Request, res: Response) => {
   res.json(blogs);
 }
 
-const getById = async (req: Request, res: Response) => {
-  const blog = await Blog.findByPk(req.params.id)
-
-  if (blog) {
-    res.json(blog);
+const getById = async (req: RequestWithBlog, res: Response) => {
+  if (req.blog) {
+    res.json(req.blog);
   } else {
     res.status(404).end()
   }
@@ -28,16 +27,12 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
-const destroy = async (req: Request, res: Response) => {
-  const blog = await Blog.findByPk(req.params.id)
-
-  if (blog) {
-    await blog.destroy()
-
-    res.status(204).end()
-  } else {
-    res.status(404).end()
+const destroy = async (req: RequestWithBlog, res: Response) => {
+  if (req.blog) {
+    await req.blog.destroy() 
   }
+
+  res.status(204).end()
 }
 
 export default { create, destroy, getAll, getById }
