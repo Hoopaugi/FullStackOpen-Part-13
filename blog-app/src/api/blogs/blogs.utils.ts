@@ -44,7 +44,7 @@ const parseTitle = (title: unknown): string => {
   return title
 }
 
-const parseLikes = (likes: unknown): number => {
+export const parseLikes = (likes: unknown): number => {
   if (!isNumber(likes)) {
     throw new Error('Invalid likes')
   }

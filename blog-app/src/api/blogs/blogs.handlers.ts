@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
-import { toNewBlog } from "./blogs.utils";
+import { toNewBlog, parseLikes } from "./blogs.utils";
 
 const getAll = async (req: Request, res: Response) => {
   const blogs = await blogsServices.getAll()
@@ -38,13 +38,17 @@ const destroy = async (req: RequestWithBlog, res: Response) => {
   res.status(204).end()
 }
 
-const update = async (req: RequestWithBlog, res: Response) => {
+const update = async (req: RequestWithBlog, res: Response, next: NextFunction) => {
   if (req.blog) {
-    req.blog.likes = Number(req.body.likes)
+    try {
+      req.blog.likes = parseLikes(req.body.likes)
 
-    await req.blog.save()
-
-    res.json(req.blog)
+      await req.blog.save()
+  
+      res.json(req.blog)
+    } catch (error) {
+      next(error)
+    }
   } else {
     res.status(404).end()
   }
