@@ -1,0 +1,8 @@
+POST http://localhost:5000/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Miguel Grinberg",
+  "url": "https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates",
+  "title": "The Flask Mega-Tutorial Part II: Templates"
+}
