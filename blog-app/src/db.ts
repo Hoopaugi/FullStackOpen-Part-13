@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize-typescript";
 import { DATABASE_URL } from "./config";
 
 import Blog from "./api/blogs/Blog";
+import User from "./api/users/User";
 
 if (!DATABASE_URL) {
   throw new Error('DATABASE_URL missing from ENV')
@@ -18,7 +19,7 @@ const connect = async () => {
 
     console.log('[Server] Connected to the database')
 
-    sequelize.addModels([Blog])
+    sequelize.addModels([Blog, User])
 
     await sequelize.sync()
   } catch (err) {

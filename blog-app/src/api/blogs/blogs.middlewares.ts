@@ -2,7 +2,7 @@ import { Response, NextFunction } from "express";
 
 import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
-import { parseId } from './blogs.utils'
+import { parseId } from "../../utils";
 
 export const blogFinder = async (req: RequestWithBlog, res: Response, next: NextFunction) => {
   try {
