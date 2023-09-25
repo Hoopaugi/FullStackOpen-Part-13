@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
+import { toNewBlog } from "./blogs.utils";
 
 const getAll = async (req: Request, res: Response) => {
   const blogs = await blogsServices.getAll()
@@ -19,9 +20,9 @@ const getById = async (req: RequestWithBlog, res: Response) => {
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const body = req.body
+    const newBlog = toNewBlog(req.body)
 
-    const blog = await blogsServices.create(body)
+    const blog = await blogsServices.create(newBlog)
 
     return res.json(blog)
   } catch (error) {

@@ -3,5 +3,7 @@ Content-Type: application/json
 
 {
   "author": "Miguel Grinberg",
-  "title": "The Flask Mega-Tutorial Part II: Templates"
+  "url": "https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates",
+  "title": "The Flask Mega-Tutorial Part II: Templates",
+  "likes": 10
 }

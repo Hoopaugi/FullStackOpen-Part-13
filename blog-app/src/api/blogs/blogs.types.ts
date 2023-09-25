@@ -9,7 +9,7 @@ export interface RequestWithBlog extends Request {
 
 export interface IBlogAttributes {
   id: number
-  author: string
+  author?: string
   url: string
   title: string
   likes: number
