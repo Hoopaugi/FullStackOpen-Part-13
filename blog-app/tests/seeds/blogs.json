@@ -1,0 +1,28 @@
+[
+  {
+    "author": "Miguel Grinberg",
+    "url": "https://blog.miguelgrinberg.com/post/introducing-the-react-mega-tutorial",
+    "title": "Introducing the React Mega-Tutorial",
+    "likes": 0
+  }, {
+    "author": "Miguel Grinberg",
+    "url": "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-1-modern-javascript",
+    "title": "The React Mega-Tutorial, Chapter 1: Modern JavaScript",
+    "likes": 0
+  }, {
+    "author": "Miguel Grinberg",
+    "url": "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-2-hello-react",
+    "title": "The React Mega-Tutorial, Chapter 2: Hello, React!",
+    "likes": 0
+  }, {
+    "author": "Miguel Grinberg",
+    "url": "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-3-working-with-components",
+    "title": "The React Mega-Tutorial, Chapter 3: Working with Components",
+    "likes": 0
+  }, {
+    "author": "Miguel Grinberg",
+    "url": "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-4-routing-and-page-navigation",
+    "title": "The React Mega-Tutorial, Chapter 4: Routing and Page Navigation",
+    "likes": 0
+  }
+]

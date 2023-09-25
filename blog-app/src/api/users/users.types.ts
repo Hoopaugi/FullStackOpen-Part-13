@@ -11,6 +11,7 @@ export interface IUserAttributes {
   id: number
   username: string
   name: string
+  passwordHash: string
 }
 
 export interface IUserCreationAttributes extends Optional<IUserAttributes, 'id'> {}
