@@ -1,10 +1,10 @@
-import { Op, WhereOptions } from "sequelize"
+import { Op, WhereOptions, Order } from "sequelize"
 
 import User from "../users/User"
 import Blog from "./Blog"
 import { IBlogCreationAttributes } from "./blogs.types"
 
-const getAll = async (search: string | undefined = undefined) => {
+const getAll = async (search: string | undefined = undefined, sort: boolean = false) => {
   let where: WhereOptions = {}
 
   if (search) {
@@ -22,7 +22,8 @@ const getAll = async (search: string | undefined = undefined) => {
       model: User,
       attributes: ['username', 'name']
     },
-    where
+    where,
+    order: sort ? [['likes', 'DESC']] : []
   })
 
   return blogs

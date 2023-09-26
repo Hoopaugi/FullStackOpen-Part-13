@@ -7,8 +7,9 @@ import { RequestWithAuthorizedUser } from "../../auth/auth.types";
 
 const getAll = async (req: Request, res: Response) => {
   const search = req.query.search ? String(req.query.search) : undefined
+  const sort = req.query.sort ? Boolean(req.query.sort) : false
 
-  const blogs = await blogsServices.getAll(search)
+  const blogs = await blogsServices.getAll(search, sort)
 
   res.json(blogs);
 }

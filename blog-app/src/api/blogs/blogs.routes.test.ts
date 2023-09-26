@@ -40,7 +40,7 @@ describe("GET /api/blogs", () => {
     expect(firstBlog.title).toEqual(firstInitialBlog.title);
     expect(firstBlog.url).toEqual(firstInitialBlog.url);
     expect(firstBlog.author).toEqual(firstInitialBlog.author);
-    expect(firstBlog.likes).toEqual(0);
+    expect(firstBlog.likes).toEqual(firstInitialBlog.likes);
     expect(firstBlog.user.username).toEqual(initialUser.username)
     expect(firstBlog.user.name).toEqual(initialUser.name)
   });
@@ -70,6 +70,29 @@ describe("GET /api/blogs", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toEqual(5);
+  });
+
+  it("Blogs can be sorted by likes in descending order", async () => {
+    const initialBlogsLikes = initialBlogs.map(blog => blog.likes)
+    const initialBlogsLikesSorted = initialBlogsLikes.sort((a, b) => {return b-a})
+
+    let res = await request(app).get("/api/blogs?sort=false")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(5);
+
+    let blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
+
+    expect(blogLikes).toEqual(initialBlogsLikes)
+
+    res = await request(app).get("/api/blogs?sort=true")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(5);
+
+    blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
+
+    expect(blogLikes).toEqual(initialBlogsLikesSorted)
   });
 });
 
@@ -171,7 +194,7 @@ describe("PUT /api/blogs", () => {
     expect(res.body.title).toEqual(firstBlog.title);
     expect(res.body.url).toEqual(firstBlog.url);
     expect(res.body.author).toEqual(firstBlog.author);
-    expect(res.body.likes).toEqual(0);
+    expect(res.body.likes).toEqual(firstBlog.likes);
     expect(res.body.userId).toEqual(initialUser.id)
 
     res = await request(app).put("/api/blogs/1").send({ likes: 10 })
