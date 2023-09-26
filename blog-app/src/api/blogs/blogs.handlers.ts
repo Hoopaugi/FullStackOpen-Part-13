@@ -26,15 +26,14 @@ const create = async (req: RequestWithAuthorizedUser, res: Response, next: NextF
 
     const blog = await blogsServices.create(newBlog)
 
-    return res.json(blog)
+    return res.status(201).json(blog)
   } catch (error) {
-    console.log(error)
     next(error)
   }
 }
 
 const destroy = async (req: RequestBlog, res: Response) => {
-  if (!(req.authorizedUser && req.blog && req.authorizedUser.id === req.blog.id)) {
+  if (!(req.authorizedUser && req.blog && req.authorizedUser.id === req.blog.userId)) {
     return res.status(401).send({error: 'Not authorized'})
   }
 

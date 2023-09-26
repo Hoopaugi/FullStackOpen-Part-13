@@ -10,13 +10,17 @@ export const authenticatedUserExtractor = async (req: RequestWithAuthorizedUser,
   const extractedToken = extractToken(req)
 
   if (!extractedToken) {
-    return next('Invalid or missing token')
+    const error = new Error('Invalid or missing token')
+
+    return next(error)
   }
-  
+
   const decodedToken = jwt.verify(extractedToken, SECRET) as JwtPayload
 
   if (!decodedToken.id) {
-    return next('Invalid or missing token')
+    const error = new Error('Invalid or missing token')
+
+    return next(error)
   }
 
   const user = await usersServices.getById(decodedToken.id)
