@@ -1,5 +1,6 @@
-import { Table, Model, Column, Default } from 'sequelize-typescript';
+import { Table, Model, Column, Default, BelongsTo, ForeignKey } from 'sequelize-typescript';
 
+import User from '../users/User';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
 
 @Table
@@ -16,6 +17,13 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
   @Default(0)
   @Column
   likes!: number;
+
+  @ForeignKey(() => User)
+  @Column
+  userId!: number
+
+  @BelongsTo(() => User)
+  user!: User
 }
 
 export default Blog

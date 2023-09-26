@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import blogsServices from "./blogs.services";
 import { RequestWithBlog } from "./blogs.types";
 import { toNewBlog, parseLikes } from "./blogs.utils";
+import { RequestWithAuthorizedUser } from "../../auth/auth.types";
 
 const getAll = async (req: Request, res: Response) => {
   const blogs = await blogsServices.getAll()
@@ -18,14 +19,16 @@ const getById = async (req: RequestWithBlog, res: Response) => {
   }
 }
 
-const create = async (req: Request, res: Response, next: NextFunction) => {
+const create = async (req: RequestWithAuthorizedUser, res: Response, next: NextFunction) => {
   try {
-    const newBlog = toNewBlog(req.body)
+    // TODO: Refactor following two lines into own function. Same for User
+    const newBlog = toNewBlog({ ...req.body, authorizedUser: req.authorizedUser})
 
     const blog = await blogsServices.create(newBlog)
 
     return res.json(blog)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }

@@ -1,13 +1,13 @@
 import db from "../../db"
 import blogsServices from "./blogs.services";
-import { seedBlogs } from "../../../tests/utils";
+import { initialUser, seedDatabase } from "../../../tests/utils";
 
 beforeAll(async () => {
   await db.connect()
 })
 
 beforeEach(async () => {
-  await seedBlogs()
+  await seedDatabase()
 })
 
 afterEach(async () => {
@@ -39,7 +39,8 @@ describe('Create new blog', () => {
       author: "Miguel Grinberg",
       url: "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end",
       title: "The React Mega-Tutorial, Chapter 5: Connecting to a Back End",
-      likes: 0
+      likes: 0,
+      userId: initialUser.id
     }
 
     const blog = await blogsServices.create(newBlog)

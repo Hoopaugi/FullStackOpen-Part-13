@@ -20,6 +20,7 @@ const getByUsername = async (req: RequestWithUser, res: Response) => {
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    // TODO: Refactor following two lines into own function. Same for Blog
     const newUser = await toNewUser(req.body)
 
     const user = await usersServices.create(newUser)

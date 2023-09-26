@@ -2,14 +2,14 @@ import request from 'supertest'
 
 import app from "../../app";
 import db from '../../db';
-import { initialUsers, seedUsers } from '../../../tests/utils';
+import { initialUsers, seedDatabase } from '../../../tests/utils';
 
 beforeAll(async () => {
   await db.connect()
 })
 
 beforeEach(async () => {
-  await seedUsers()
+  await seedDatabase()
 })
 
 afterEach(async () => {

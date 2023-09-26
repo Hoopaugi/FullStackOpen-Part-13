@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { Optional } from "sequelize";
 
+import Blog from "../blogs/Blog";
 import User from "./User";
 
 export interface RequestWithUser extends Request {
@@ -12,6 +13,7 @@ export interface IUserAttributes {
   username: string
   name: string
   passwordHash: string
+  blogs: Blog[]
 }
 
 export interface IUserCreationAttributes extends Optional<IUserAttributes, 'id'> {}

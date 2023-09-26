@@ -3,20 +3,32 @@ import blogs from './seeds/blogs.json'
 import User from "../src/api/users/User"
 import users from './seeds/users.json'
 import { hashPassword } from "../src/utils"
+import { toNewUser } from "../src/api/users/users.utils"
+import { toNewBlog } from "../src/api/blogs/blogs.utils"
 
 export const initialUsers = users
 export const initialBlogs = blogs
 
-export const seedBlogs = async () => {
-  for (const blog of blogs) {
-    await Blog.create(blog)
-  }
-}
+export let initialUser: User
 
-export const seedUsers = async () => {
+export const seedDatabase = async () => {
   for (const user of users) {
-    const passwordHash = await hashPassword(user.password)
+    const newUser = await toNewUser(user)
 
-    await User.create({ username: user.username, name: user.name, passwordHash })
+    await User.create(newUser)
+  }
+
+  const user = await User.findByPk(1, { include: [Blog] })
+
+  if (user) {
+    initialUser = user
+
+    for (const blog of blogs) {
+      const newBlog = toNewBlog({ ...blog, authorizedUser: initialUser})
+
+      await Blog.create(newBlog)
+    }
+  } else {
+    throw new Error('Should not happen')
   }
 }

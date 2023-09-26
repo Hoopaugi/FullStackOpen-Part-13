@@ -1,14 +1,14 @@
 import db from "../db";
 import authServices from "./auth.services";
 
-import { initialUsers, seedUsers } from "../../tests/utils";
+import { initialUsers, seedDatabase } from "../../tests/utils";
 
 beforeAll(async () => {
   await db.connect()
 })
 
 beforeEach(async () => {
-  await seedUsers()
+  await seedDatabase()
 })
 
 afterEach(async () => {
