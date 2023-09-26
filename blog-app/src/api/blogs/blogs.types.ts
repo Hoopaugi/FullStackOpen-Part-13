@@ -4,8 +4,9 @@ import { Optional } from "sequelize";
 import Blog from "./Blog";
 import User from "../users/User";
 
-export interface RequestWithBlog extends Request {
+export interface RequestBlog extends Request {
   blog?: Blog
+  authorizedUser?: User
 }
 
 export interface IBlogAttributes {

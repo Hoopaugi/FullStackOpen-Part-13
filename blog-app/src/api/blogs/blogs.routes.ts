@@ -9,7 +9,7 @@ const router = express.Router()
 router.get('/', handlers.getAll)
 router.get('/:id', blogFinder, handlers.getById)
 router.post('/', authenticatedUserExtractor, handlers.create)
-router.delete('/:id', blogFinder, handlers.destroy)
+router.delete('/:id', authenticatedUserExtractor, blogFinder, handlers.destroy)
 router.put('/:id', blogFinder, handlers.update)
 
 export default router

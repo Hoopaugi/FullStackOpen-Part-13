@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import blogsServices from "./blogs.services";
-import { RequestWithBlog } from "./blogs.types";
+import { RequestBlog } from "./blogs.types";
 import { toNewBlog, parseLikes } from "./blogs.utils";
 import { RequestWithAuthorizedUser } from "../../auth/auth.types";
 
@@ -11,7 +11,7 @@ const getAll = async (req: Request, res: Response) => {
   res.json(blogs);
 }
 
-const getById = async (req: RequestWithBlog, res: Response) => {
+const getById = async (req: RequestBlog, res: Response) => {
   if (req.blog) {
     res.json(req.blog);
   } else {
@@ -33,15 +33,17 @@ const create = async (req: RequestWithAuthorizedUser, res: Response, next: NextF
   }
 }
 
-const destroy = async (req: RequestWithBlog, res: Response) => {
-  if (req.blog) {
-    await req.blog.destroy() 
+const destroy = async (req: RequestBlog, res: Response) => {
+  if (!(req.authorizedUser && req.blog && req.authorizedUser.id === req.blog.id)) {
+    return res.status(401).send({error: 'Not authorized'})
   }
+
+  await req.blog.destroy() 
 
   res.status(204).end()
 }
 
-const update = async (req: RequestWithBlog, res: Response, next: NextFunction) => {
+const update = async (req: RequestBlog, res: Response, next: NextFunction) => {
   if (req.blog) {
     try {
       req.blog.likes = parseLikes(req.body.likes)
