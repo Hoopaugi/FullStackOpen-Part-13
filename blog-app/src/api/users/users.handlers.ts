@@ -24,7 +24,10 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
     const user = await usersServices.create(newUser)
 
-    return res.json(user)
+    // FIXME: Bandaid to strip passwordHash from return
+    const { passwordHash: _, ...returnedUser } = user.toJSON()
+
+    return res.status(201).json(returnedUser)
   } catch (error) {
     next(error)
   }
