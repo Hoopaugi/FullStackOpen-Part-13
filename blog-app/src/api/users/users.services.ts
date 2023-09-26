@@ -13,8 +13,14 @@ const getById = async (id: string) => {
   return user
 }
 
-const getByUsername = async (username: string) => {
-  const user = await User.findOne({ where: { username } })
+const getByUsername = async (username: string, includeHash: Boolean = false) => {
+  let user
+
+  if (includeHash) {
+    user = await User.scope('full').findOne({ where: { username } })
+  } else {
+    user = await User.findOne({ where: { username } })
+  }
 
   return user
 }

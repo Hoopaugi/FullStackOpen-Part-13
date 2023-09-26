@@ -35,4 +35,13 @@ const connect = async () => {
   }
 }
 
-export default { connect, sequelize }
+const sync = async () => {
+  await sequelize.sync()
+}
+
+const drop = async () => {
+  await Blog.drop()
+  await User.drop()
+}
+
+export default { connect, drop, sequelize, sync }

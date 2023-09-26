@@ -1,6 +1,6 @@
 import { isString } from "../../utils"
 import { IUserCreationAttributes } from "./users.types"
-import { hashPassword } from "./users.auth";
+import { hashPassword } from "../../utils";
 
 export const toNewUser = async (object: unknown): Promise<IUserCreationAttributes> => {
   if ( !object || typeof object !== 'object' ) {

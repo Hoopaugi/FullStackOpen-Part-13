@@ -4,8 +4,16 @@ import { seedBlogs } from "../../../tests/utils";
 
 beforeAll(async () => {
   await db.connect()
+})
 
+beforeEach(async () => {
   await seedBlogs()
+})
+
+afterEach(async () => {
+  await db.drop()
+
+  await db.sync()
 })
 
 describe('Get all blogs', () => {

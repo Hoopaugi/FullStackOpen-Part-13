@@ -1,3 +1,20 @@
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
+export const hashPassword = async (password:string): Promise<string> => {
+  const saltRounds = 10
+
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  return passwordHash
+}
+
+export const comparePassword = async (password: string, passwordHash: string): Promise<boolean> => {
+  const match = await bcrypt.compare(password, passwordHash)
+
+  return match
+}
+
 export const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 }
@@ -16,4 +33,10 @@ export const parseId = (object: unknown): string => {
   }
 
   return object
+}
+
+export const createToken = (object: Object, secret: string): string => {
+  const token = jwt.sign(object, secret)
+
+  return token
 }
