@@ -33,6 +33,18 @@ describe("GET /api/blogs", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toEqual(initialBlogs.length);
+
+    const firstInitialBlog = initialBlogs[0]
+    const firstBlog = res.body[0]
+
+    expect(firstBlog.title).toEqual(firstInitialBlog.title);
+    expect(firstBlog.url).toEqual(firstInitialBlog.url);
+    expect(firstBlog.author).toEqual(firstInitialBlog.author);
+    expect(firstBlog.likes).toEqual(0);
+    expect(firstBlog.userId).toEqual(initialUser.id)
+    expect(firstBlog.user.id).toEqual(initialUser.id)
+    expect(firstBlog.user.username).toEqual(initialUser.username)
+    expect(firstBlog.user.name).toEqual(initialUser.name)
   });
 
   it("Individual blogs with correct ID can be fetched", async () => {

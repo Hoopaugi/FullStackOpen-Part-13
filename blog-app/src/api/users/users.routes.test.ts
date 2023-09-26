@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import app from "../../app";
 import db from '../../db';
-import { initialUsers, seedDatabase } from '../../../tests/utils';
+import { initialUsers, seedDatabase, initialBlogs } from '../../../tests/utils';
 
 beforeAll(async () => {
   await db.connect()
@@ -24,6 +24,14 @@ describe("GET /api/users", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toEqual(initialUsers.length);
+
+    const firstUser = res.body[0]
+    const firstBlog = firstUser.blogs[0]
+    const firstInitialBlog = initialBlogs[0]
+
+    expect(firstBlog.title).toEqual(firstInitialBlog.title);
+    expect(firstBlog.url).toEqual(firstInitialBlog.url);
+    expect(firstBlog.author).toEqual(firstInitialBlog.author);
   });
 
   it("Individual users with correct ID can be fetched", async () => {
