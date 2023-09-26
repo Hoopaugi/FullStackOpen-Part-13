@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import app from "../../app";
 import db from '../../db';
-import { initialUsers, seedDatabase, initialBlogs } from '../../../tests/utils';
+import { initialUsers, seedDatabase, initialBlogs } from '../../db/utils';
 
 beforeAll(async () => {
   await db.connect()
@@ -26,7 +26,8 @@ describe("GET /api/users", () => {
     expect(res.body.length).toEqual(initialUsers.length);
 
     const firstUser = res.body[0]
-    const firstBlog = firstUser.blogs[0]
+    // FIXME: Magic index
+    const firstBlog = firstUser.blogs[3]
     const firstInitialBlog = initialBlogs[0]
 
     expect(firstBlog.title).toEqual(firstInitialBlog.title);

@@ -1,6 +1,6 @@
 import db from "../../db"
 import blogsServices from "./blogs.services";
-import { initialUser, seedDatabase } from "../../../tests/utils";
+import { initialUser, seedDatabase, initialBlogs } from "../../db/utils";
 
 beforeAll(async () => {
   await db.connect()
@@ -20,7 +20,7 @@ describe('Get all blogs', () => {
   test('All blogs are fetched correctly', async () => {
     const blogs = await blogsServices.getAll()
   
-    expect(blogs.length).toBe(5);
+    expect(blogs.length).toBe(initialBlogs.length);
   });
 })
 

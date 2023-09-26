@@ -1,10 +1,9 @@
-import Blog from "../src/api/blogs/Blog"
+import Blog from "../api/blogs/Blog"
+import User from "../api/users/User"
+import { toNewUser } from "../api/users/users.utils"
+import { toNewBlog } from "../api/blogs/blogs.utils"
 import blogs from './seeds/blogs.json'
-import User from "../src/api/users/User"
 import users from './seeds/users.json'
-import { hashPassword } from "../src/utils"
-import { toNewUser } from "../src/api/users/users.utils"
-import { toNewBlog } from "../src/api/blogs/blogs.utils"
 
 export const initialUsers = users
 export const initialBlogs = blogs

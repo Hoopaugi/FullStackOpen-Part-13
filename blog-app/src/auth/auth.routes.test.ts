@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import app from "../app";
 import db from '../db';
-import { initialUsers, seedDatabase } from '../../tests/utils';
+import { initialUsers, seedDatabase } from '../db/utils';
 
 beforeAll(async () => {
   await db.connect()

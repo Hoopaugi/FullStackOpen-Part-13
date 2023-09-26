@@ -24,5 +24,30 @@
     "url": "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-4-routing-and-page-navigation",
     "title": "The React Mega-Tutorial, Chapter 4: Routing and Page Navigation",
     "likes": 5224
+  }, {
+    "author": "Troy Hunt",
+    "url": "https://www.troyhunt.com/data-from-the-qakbot-malware-is-now-searchable-in-have-i-been-pwned-courtesy-of-the-fbi/",
+    "title": "Data From The Qakbot Malware is Now Searchable in Have I Been Pwned, Courtesy of the FBI",
+    "likes": 335
+  }, {
+    "author": "Troy Hunt",
+    "url": "https://www.troyhunt.com/fighting-api-bots-with-cloudflares-invisible-turnstile/",
+    "title": "Fighting API Bots with Cloudflare's Invisible Turnstile",
+    "likes": 31
+  }, {
+    "author": "Coding Horror",
+    "url": "https://blog.codinghorror.com/building-a-pc-part-i/",
+    "title": "Building a PC, Part I",
+    "likes": 634
+  }, {
+    "author": "Coding Horror",
+    "url": "https://blog.codinghorror.com/building-a-pc-part-ii/",
+    "title": "Building a PC, Part II",
+    "likes": 12
+  }, {
+    "author": "Coding Horror",
+    "url": "https://blog.codinghorror.com/building-a-pc-part-iii-overclocking/",
+    "title": "Building a PC, Part III - Overclocking",
+    "likes": 122
   }
 ]

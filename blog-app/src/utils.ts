@@ -1,5 +1,13 @@
+import fs from 'fs'
+
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+
+export const readJson = (path: string) => {
+  const data = JSON.parse(fs.readFileSync(path, 'utf-8'))
+
+  return data
+}
 
 export const hashPassword = async (password:string): Promise<string> => {
   const saltRounds = 10

@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import app from "../../app";
 import db from '../../db';
-import { seedDatabase, initialBlogs, initialUsers, initialUser } from '../../../tests/utils';
+import { seedDatabase, initialBlogs, initialUsers, initialUser } from '../../db/utils';
 import authServices from '../../auth/auth.services';
 
 let token: string
@@ -79,7 +79,7 @@ describe("GET /api/blogs", () => {
     let res = await request(app).get("/api/blogs?sort=false")
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toEqual(5);
+    expect(res.body.length).toEqual(initialBlogs.length);
 
     let blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
 
@@ -88,7 +88,7 @@ describe("GET /api/blogs", () => {
     res = await request(app).get("/api/blogs?sort=true")
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toEqual(5);
+    expect(res.body.length).toEqual(initialBlogs.length);
 
     blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
 
@@ -231,11 +231,16 @@ describe("DELETE /api/blogs", () => {
     res = await request(app).get("/api/blogs")
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toEqual(6);
+    expect(res.body.length).toEqual(initialBlogs.length + 1);
 
     res = await request(app).del(`/api/blogs/${blogToDelete.id}`).set('Authorization', `Bearer ${token}`);
 
     expect(res.statusCode).toBe(204);
+
+    res = await request(app).get("/api/blogs")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(initialBlogs.length);
   });
 
   it("Fails without authorization", async () => {
@@ -264,7 +269,7 @@ describe("DELETE /api/blogs", () => {
     res = await request(app).get("/api/blogs")
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toEqual(6);
+    expect(res.body.length).toEqual(initialBlogs.length + 1);
 
     const credentials = { username: initialUsers[1].username, password: initialUsers[1].password }
 
@@ -275,5 +280,10 @@ describe("DELETE /api/blogs", () => {
     res = await request(app).del(`/api/blogs/${blogToDelete.id}`).set('Authorization', `Bearer ${secondToken}`);
 
     expect(res.statusCode).toBe(401);
+
+    res = await request(app).get("/api/blogs")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(initialBlogs.length + 1);
   });
 });
