@@ -1,9 +1,29 @@
+import { Op, WhereOptions } from "sequelize"
+
 import User from "../users/User"
 import Blog from "./Blog"
 import { IBlogCreationAttributes } from "./blogs.types"
 
-const getAll = async () => {
-  const blogs = await Blog.findAll({ include: [User] })
+const getAll = async (search: string | undefined = undefined) => {
+  let where: WhereOptions = {}
+
+  if (search) {
+    where = {
+      [Op.or]: [
+        { title: { [Op.substring]: search } },
+        { author: { [Op.substring]: search } }
+      ]
+    }
+  }
+
+  const blogs = await Blog.findAll({
+    attributes: { exclude: ['userId'] },
+    include: {
+      model: User,
+      attributes: ['username', 'name']
+    },
+    where
+  })
 
   return blogs
 }

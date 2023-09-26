@@ -41,8 +41,6 @@ describe("GET /api/blogs", () => {
     expect(firstBlog.url).toEqual(firstInitialBlog.url);
     expect(firstBlog.author).toEqual(firstInitialBlog.author);
     expect(firstBlog.likes).toEqual(0);
-    expect(firstBlog.userId).toEqual(initialUser.id)
-    expect(firstBlog.user.id).toEqual(initialUser.id)
     expect(firstBlog.user.username).toEqual(initialUser.username)
     expect(firstBlog.user.name).toEqual(initialUser.name)
   });
@@ -60,6 +58,18 @@ describe("GET /api/blogs", () => {
     const res = await request(app).get("/api/blogs/100")
 
     expect(res.statusCode).toBe(404);
+  });
+
+  it("Blogs can be searched for", async () => {
+    let res = await request(app).get("/api/blogs?search=Routing")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(1);
+
+    res = await request(app).get("/api/blogs?search=Grinberg")
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toEqual(5);
   });
 });
 

@@ -6,7 +6,9 @@ import { toNewBlog, parseLikes } from "./blogs.utils";
 import { RequestWithAuthorizedUser } from "../../auth/auth.types";
 
 const getAll = async (req: Request, res: Response) => {
-  const blogs = await blogsServices.getAll()
+  const search = req.query.search ? String(req.query.search) : undefined
+
+  const blogs = await blogsServices.getAll(search)
 
   res.json(blogs);
 }
