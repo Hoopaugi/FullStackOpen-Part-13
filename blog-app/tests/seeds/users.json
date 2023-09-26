@@ -1,6 +1,6 @@
 [
   {
-    "username": "tester",
+    "username": "tester@example.com",
     "name": "Test User",
     "password": "secret"
   }

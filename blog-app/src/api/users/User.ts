@@ -1,4 +1,4 @@
-import { Table, Model, Column, Unique, Scopes, DefaultScope } from 'sequelize-typescript';
+import { Table, Model, Column, Unique, Scopes, DefaultScope, IsEmail } from 'sequelize-typescript';
 
 import { IUserAttributes, IUserCreationAttributes } from './users.types';
 
@@ -17,6 +17,7 @@ import { IUserAttributes, IUserCreationAttributes } from './users.types';
 @Table
 class User extends Model<IUserAttributes, IUserCreationAttributes> {
   @Unique
+  @IsEmail
   @Column
   username!: string;
 

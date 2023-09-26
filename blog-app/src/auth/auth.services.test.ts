@@ -1,7 +1,7 @@
 import db from "../db";
 import authServices from "./auth.services";
 
-import { seedUsers } from "../../tests/utils";
+import { initialUsers, seedUsers } from "../../tests/utils";
 
 beforeAll(async () => {
   await db.connect()
@@ -19,12 +19,12 @@ afterEach(async () => {
 
 describe('Login', () => {
   test('Login with valid credentials returns a token', async () => {
-    const token = await authServices.login("tester", "secret")
+    const token = await authServices.login({ ...initialUsers[0] })
   
     expect(token!.token).toBeDefined()
   });
 
   test('Login with invalid credentials fails', async () => {
-    await expect(authServices.login("tester", "secret2")).rejects.toThrow()
+    await expect(authServices.login({ ...initialUsers[0], password: 'wrongpassword' })).rejects.toThrow()
   });
 })

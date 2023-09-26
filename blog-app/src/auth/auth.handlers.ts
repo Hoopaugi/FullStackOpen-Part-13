@@ -6,7 +6,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, password } = req.body
 
-    const tokenPayload = await authServices.login(username, password)
+    const tokenPayload = await authServices.login({username, password})
 
     res.status(200).send(tokenPayload)
   } catch (error) {

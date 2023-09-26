@@ -1,9 +1,11 @@
 import usersServices from "../api/users/users.services"
 import { comparePassword, createToken } from "../utils"
 import { SECRET } from "../config"
-import { IAuthPayload } from "./auth.types"
+import { IAuthPayload, ICredentials } from "./auth.types"
 
-const login = async (username: string, password: string): Promise<IAuthPayload> => {
+const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
+  const { username, password } = credentials
+
   const user = await usersServices.getByUsername(username, true)
 
   if (!user) {

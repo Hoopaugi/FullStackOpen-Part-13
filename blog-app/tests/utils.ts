@@ -4,6 +4,9 @@ import User from "../src/api/users/User"
 import users from './seeds/users.json'
 import { hashPassword } from "../src/utils"
 
+export const initialUsers = users
+export const initialBlogs = blogs
+
 export const seedBlogs = async () => {
   for (const blog of blogs) {
     await Blog.create(blog)
