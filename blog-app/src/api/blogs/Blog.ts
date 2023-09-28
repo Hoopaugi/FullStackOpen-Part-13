@@ -1,4 +1,4 @@
-import { Table, Model, Column, Default, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max } from 'sequelize-typescript';
 
 import User from '../users/User';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
@@ -17,6 +17,11 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
   @Default(0)
   @Column
   likes!: number;
+
+  @Min(1991)
+  @Max(2023)
+  @Column
+  year!: number;
 
   @ForeignKey(() => User)
   @Column

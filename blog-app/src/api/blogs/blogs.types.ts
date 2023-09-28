@@ -15,6 +15,7 @@ export interface IBlogAttributes {
   url: string
   title: string
   likes: number
+  year: number
   user_id: number
 }
 

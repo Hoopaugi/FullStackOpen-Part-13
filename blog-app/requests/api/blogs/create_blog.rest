@@ -5,5 +5,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc
 {
   "author": "Miguel Grinberg",
   "url": "https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates",
-  "title": "The Flask Mega-Tutorial Part II: Templates"
+  "title": "The Flask Mega-Tutorial Part II: Templates",
+  "year": 2024
 }

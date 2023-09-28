@@ -40,6 +40,7 @@ describe('Create new blog', () => {
       url: "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end",
       title: "The React Mega-Tutorial, Chapter 5: Connecting to a Back End",
       likes: 0,
+      year: 2022,
       user_id: initialUser.id
     }
 
