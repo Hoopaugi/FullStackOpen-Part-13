@@ -43,7 +43,7 @@ export const parseId = (object: unknown): string => {
   return object
 }
 
-export const createToken = (object: Object, secret: string): string => {
+export const createToken = (object: object, secret: string): string => {
   const token = jwt.sign(object, secret)
 
   return token

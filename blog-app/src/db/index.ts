@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize-typescript";
 import { DATABASE_URL, NODE_ENV } from "../config";
 import Blog from "../api/blogs/Blog";
 import User from "../api/users/User";
+import Readinglist from "../api/readinglist/Readinglist";
 
 export let sequelize: Sequelize
 
@@ -32,7 +33,7 @@ const connect = async () => {
       console.log('[Server] Connected to the database')
     }
 
-    sequelize.addModels([Blog, User])
+    sequelize.addModels([Blog, User, Readinglist])
 
     await sequelize.sync()
   } catch (err) {
@@ -47,6 +48,7 @@ const sync = async () => {
 }
 
 const drop = async () => {
+  await Readinglist.drop()
   await Blog.drop()
   await User.drop()
 }

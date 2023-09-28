@@ -102,7 +102,7 @@ describe("POST /api/blogs", () => {
       title: 'The React Mega-Tutorial, Chapter 5: Connecting to a Back End',
       url: 'https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end',
       author: 'Miguel Grinberg',
-      year: 2022
+      published: 2022
     }
 
     let res = await request(app).post("/api/blogs").send(blog).set('Authorization', `Bearer ${token}`);
@@ -115,7 +115,7 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(blog.author);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.user_id).toEqual(initialUser.id)
+    expect(res.body.userId).toEqual(initialUser.id)
 
     res = await request(app).get("/api/blogs")
 
@@ -130,14 +130,14 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(blog.author);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.user_id).toEqual(initialUser.id)
+    expect(res.body.userId).toEqual(initialUser.id)
   });
 
   it("Creating a new blog succeeds with missing author", async () => {
     const blog = {
       title: 'The React Mega-Tutorial, Chapter 5: Connecting to a Back End',
       url: 'https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end',
-      year: 2022
+      published: 2022
     }
 
     let res = await request(app).post("/api/blogs").send(blog).set('Authorization', `Bearer ${token}`);
@@ -148,7 +148,7 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(undefined);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.user_id).toEqual(initialUser.id)
+    expect(res.body.userId).toEqual(initialUser.id)
 
     res = await request(app).get("/api/blogs")
 
@@ -160,7 +160,7 @@ describe("POST /api/blogs", () => {
     const blog = {
       url: 'https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end',
       author: 'Miguel Grinberg',
-      year: 2022
+      published: 2022
     }
 
     let res = await request(app).post("/api/blogs").send(blog).set('Authorization', `Bearer ${token}`);
@@ -177,7 +177,7 @@ describe("POST /api/blogs", () => {
     const blog = {
       title: 'The React Mega-Tutorial, Chapter 5: Connecting to a Back End',
       author: 'Miguel Grinberg',
-      year: 2022
+      published: 2022
     }
 
     let res = await request(app).post("/api/blogs").send(blog).set('Authorization', `Bearer ${token}`);
@@ -220,7 +220,7 @@ describe("PUT /api/blogs", () => {
     expect(res.body.url).toEqual(firstBlog.url);
     expect(res.body.author).toEqual(firstBlog.author);
     expect(res.body.likes).toEqual(firstBlog.likes);
-    expect(res.body.user_id).toEqual(initialUser.id)
+    expect(res.body.userId).toEqual(initialUser.id)
 
     res = await request(app).put("/api/blogs/1").send({ likes: 10 })
 
@@ -234,7 +234,7 @@ describe("PUT /api/blogs", () => {
     expect(res.body.url).toEqual(firstBlog.url);
     expect(res.body.author).toEqual(firstBlog.author);
     expect(res.body.likes).toEqual(10);
-    expect(res.body.user_id).toEqual(initialUser.id)
+    expect(res.body.userId).toEqual(initialUser.id)
   });
 });
 
@@ -244,7 +244,7 @@ describe("DELETE /api/blogs", () => {
       title: 'Delete Me Title',
       url: 'Delete Me Url',
       author: 'Delete Me Author',
-      year: 2023
+      published: 2023
     }
 
     let res = await request(app).post("/api/blogs").send(newBlog).set('Authorization', `Bearer ${token}`);
@@ -287,7 +287,7 @@ describe("DELETE /api/blogs", () => {
       title: 'Delete Me Title',
       url: 'Delete Me Url',
       author: 'Delete Me Author',
-      year: 2023
+      published: 2023
     }
 
     let res = await request(app).post("/api/blogs").send(newBlog).set('Authorization', `Bearer ${token}`);

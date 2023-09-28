@@ -15,8 +15,8 @@ export interface IBlogAttributes {
   url: string
   title: string
   likes: number
-  year: number
-  user_id: number
+  published: number
+  userId: number
 }
 
 export interface IBlogCreationAttributes extends Optional<IBlogAttributes, 'id'> {}

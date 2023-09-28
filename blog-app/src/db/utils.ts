@@ -17,7 +17,7 @@ export const seedDatabase = async () => {
     await User.create(newUser)
   }
 
-  const user = await User.findByPk(1, { include: [Blog] })
+  const user = await User.findByPk(1, { include: ['blogs'] })
 
   if (user) {
     initialUser = user

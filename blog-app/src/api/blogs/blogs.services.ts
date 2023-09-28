@@ -18,10 +18,11 @@ const getAll = async (search: string | undefined = undefined, sort: boolean = fa
 
   const blogs = await Blog.findAll({
     attributes: { exclude: ['user_id'] },
-    include: {
+    include: [{
       model: User,
+      as: 'user',
       attributes: ['username', 'name']
-    },
+    }],
     where,
     order: sort ? [['likes', 'DESC']] : []
   })
@@ -30,13 +31,13 @@ const getAll = async (search: string | undefined = undefined, sort: boolean = fa
 }
 
 const getById = async (id: string) => {
-  const blog = await Blog.findByPk(id, { include: [User] })
+  const blog = await Blog.findByPk(id, { include: ['user'] })
 
   return blog
 }
 
 const create = async (object: IBlogCreationAttributes): Promise<Blog> => {
-  const blog = await Blog.create(object, { include: [User] })
+  const blog = await Blog.create(object, { include: ['user'] })
 
   return blog
 }

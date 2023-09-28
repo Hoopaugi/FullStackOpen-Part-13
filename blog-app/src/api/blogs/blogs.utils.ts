@@ -14,15 +14,15 @@ export const toNewBlog = (object: unknown): IBlogCreationAttributes => {
     throw new Error('Incorrect or missing authorizedUser');
   }
 
-  if ('title' in object && 'url' in object && 'authorizedUser' in object && 'year' in object) {
+  if ('title' in object && 'url' in object && 'authorizedUser' in object && 'published' in object) {
     const newBlog: IBlogCreationAttributes = {
       title: parseTitle(object.title),
       url: parseUrl(object.url),
       author: 'author' in object ? parseAuthor(object.author) : undefined,
       likes: 'likes' in object ? parseLikes(object.likes) : 0,
-      year: parseYear(object.year),
+      published: parseYear(object.published),
       // FIXME: Type coercion
-      user_id: object.authorizedUser.id
+      userId: object.authorizedUser.id
     }
 
     return newBlog
