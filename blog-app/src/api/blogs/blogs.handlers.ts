@@ -36,7 +36,7 @@ const create = async (req: RequestWithAuthorizedUser, res: Response, next: NextF
 }
 
 const destroy = async (req: RequestBlog, res: Response) => {
-  if (!(req.authorizedUser && req.blog && req.authorizedUser.id === req.blog.userId)) {
+  if (!(req.authorizedUser && req.blog && req.authorizedUser.id === req.blog.user_id)) {
     return res.status(401).send({error: 'Not authorized'})
   }
 

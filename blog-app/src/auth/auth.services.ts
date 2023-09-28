@@ -12,7 +12,7 @@ const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
     throw new Error('Invalid username or password')
   }
 
-  const passwordCorrect = await comparePassword(password, user.passwordHash)
+  const passwordCorrect = await comparePassword(password, user.password_hash)
 
   if (!passwordCorrect) {
     throw new Error('Invalid username or password')

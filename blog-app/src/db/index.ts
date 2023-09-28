@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 
 import { DATABASE_URL, NODE_ENV } from "../config";
-
 import Blog from "../api/blogs/Blog";
 import User from "../api/users/User";
 

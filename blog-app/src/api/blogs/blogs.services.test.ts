@@ -40,7 +40,7 @@ describe('Create new blog', () => {
       url: "https://blog.miguelgrinberg.com/post/the-react-mega-tutorial-chapter-5-connecting-to-a-back-end",
       title: "The React Mega-Tutorial, Chapter 5: Connecting to a Back End",
       likes: 0,
-      userId: initialUser.id
+      user_id: initialUser.id
     }
 
     const blog = await blogsServices.create(newBlog)

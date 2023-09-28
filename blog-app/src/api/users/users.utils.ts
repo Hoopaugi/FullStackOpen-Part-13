@@ -11,7 +11,7 @@ export const toNewUser = async (object: unknown): Promise<IUserCreationAttribute
     const newUser: IUserCreationAttributes = {
       username: parseUsername(object.username),
       name: parseName(object.name),
-      passwordHash: await parsePassword(object.password),
+      password_hash: await parsePassword(object.password),
       blogs: []
     }
 

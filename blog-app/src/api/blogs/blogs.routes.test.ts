@@ -113,7 +113,7 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(blog.author);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.userId).toEqual(initialUser.id)
+    expect(res.body.user_id).toEqual(initialUser.id)
 
     res = await request(app).get("/api/blogs")
 
@@ -127,7 +127,7 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(blog.author);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.userId).toEqual(initialUser.id)
+    expect(res.body.user_id).toEqual(initialUser.id)
   });
 
   it("Creating a new blog succeeds with missing author", async () => {
@@ -143,7 +143,7 @@ describe("POST /api/blogs", () => {
     expect(res.body.url).toEqual(blog.url);
     expect(res.body.author).toEqual(undefined);
     expect(res.body.likes).toEqual(0);
-    expect(res.body.userId).toEqual(initialUser.id)
+    expect(res.body.user_id).toEqual(initialUser.id)
 
     res = await request(app).get("/api/blogs")
 
@@ -195,7 +195,7 @@ describe("PUT /api/blogs", () => {
     expect(res.body.url).toEqual(firstBlog.url);
     expect(res.body.author).toEqual(firstBlog.author);
     expect(res.body.likes).toEqual(firstBlog.likes);
-    expect(res.body.userId).toEqual(initialUser.id)
+    expect(res.body.user_id).toEqual(initialUser.id)
 
     res = await request(app).put("/api/blogs/1").send({ likes: 10 })
 
@@ -206,7 +206,7 @@ describe("PUT /api/blogs", () => {
     expect(res.body.url).toEqual(firstBlog.url);
     expect(res.body.author).toEqual(firstBlog.author);
     expect(res.body.likes).toEqual(10);
-    expect(res.body.userId).toEqual(initialUser.id)
+    expect(res.body.user_id).toEqual(initialUser.id)
   });
 });
 

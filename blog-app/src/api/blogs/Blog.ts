@@ -20,7 +20,7 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
 
   @ForeignKey(() => User)
   @Column
-  userId!: number
+  user_id!: number
 
   @BelongsTo(() => User)
   user!: User

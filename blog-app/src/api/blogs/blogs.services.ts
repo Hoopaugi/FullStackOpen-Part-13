@@ -17,7 +17,7 @@ const getAll = async (search: string | undefined = undefined, sort: boolean = fa
   }
 
   const blogs = await Blog.findAll({
-    attributes: { exclude: ['userId'] },
+    attributes: { exclude: ['user_id'] },
     include: {
       model: User,
       attributes: ['username', 'name']

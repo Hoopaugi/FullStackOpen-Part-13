@@ -12,7 +12,7 @@ export interface IUserAttributes {
   id: number
   username: string
   name: string
-  passwordHash: string
+  password_hash: string
   blogs: Blog[]
 }
 

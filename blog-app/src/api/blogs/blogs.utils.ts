@@ -21,7 +21,7 @@ export const toNewBlog = (object: unknown): IBlogCreationAttributes => {
       author: 'author' in object ? parseAuthor(object.author) : undefined,
       likes: 'likes' in object ? parseLikes(object.likes) : 0,
       // FIXME: Type coercion
-      userId: object.authorizedUser.id
+      user_id: object.authorizedUser.id
     }
 
     return newBlog

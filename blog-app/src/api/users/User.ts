@@ -10,7 +10,7 @@ import { IUserAttributes, IUserCreationAttributes } from './users.types';
 @Scopes(() => ({
   full: {
     attributes: {
-      include: ['passwordHash']
+      include: ['password_hash']
     }
   }
 }))
@@ -26,7 +26,7 @@ class User extends Model<IUserAttributes, IUserCreationAttributes> {
   name!: string;
 
   @Column
-  passwordHash!: string;
+  password_hash!: string;
 
   @HasMany(() => Blog)
   blogs!: Blog[]
