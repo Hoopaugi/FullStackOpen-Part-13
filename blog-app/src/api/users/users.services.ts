@@ -1,4 +1,5 @@
 import User from "./User"
+import Blog from "../blogs/Blog"
 import { IUserCreationAttributes } from "./users.types"
 
 const getAll = async () => {
@@ -25,7 +26,23 @@ const getByUsername = async (username: string, includeHash: boolean = false) => 
   if (includeHash) {
     user = await User.scope('full').findOne({ where: { username }, include: ['blogs'] })
   } else {
-    user = await User.findOne({ where: { username }, include: ['blogs'] })
+    user = await User.findOne({
+      where: { username },
+      include: [
+        'blogs',
+        {
+          model: Blog,
+          as: 'readings',
+          attributes: [
+            'id',
+            'url',
+            'title',
+            'likes',
+            'published',
+          ]
+        }
+      ]
+    })
   }
 
   return user

@@ -4,6 +4,7 @@ import readinglistServices from "./readinglist.services";
 import usersServices from "../users/users.services";
 import blogsServices from "../blogs/blogs.services";
 import { toNewReadinglist } from "./readinglist.utils";
+import { RequestReadinglist } from "./readinglist.types";
 
 const getAll = async (req: Request, res: Response) => {
   const readinglists = await readinglistServices.getAll()
@@ -32,4 +33,28 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export default { create, getAll }
+const update = async (req: RequestReadinglist, res: Response, next: NextFunction) => {
+  if (!req.readinglist) {
+    return res.status(404).end()
+  }
+
+  if (!req.authorizedUser) {
+    return res.status(400).send({ error: 'Not authorized' })
+  }
+
+  if (req.readinglist.userId !== req.authorizedUser.id) {
+    return res.status(400).send({ error: 'Not owner' })
+  }
+
+  try {
+    req.readinglist.read = ! req.readinglist.read
+
+    await req.readinglist.save()
+
+    res.json(req.readinglist)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export default { create, getAll, update }

@@ -13,6 +13,9 @@ class Readinglist extends Model<IReadinglistAttributes, IReadinglistCreationAttr
   @ForeignKey(() => Blog)
   @Column
   blogId!: number;
+
+  @Column
+  read!: boolean
 }
 
 export default Readinglist
