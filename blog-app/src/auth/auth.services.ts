@@ -4,6 +4,7 @@ import { SECRET } from "../config"
 import { IAuthPayload, ICredentials } from "./auth.types"
 
 const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
+
   const { username, password } = credentials
 
   const user = await usersServices.getByUsername(username, true)
@@ -12,7 +13,7 @@ const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
     throw new Error('Invalid username or password')
   }
 
-  const passwordCorrect = await comparePassword(password, user.password_hash)
+  const passwordCorrect = await comparePassword(password, user.passwordHash)
 
   if (!passwordCorrect) {
     throw new Error('Invalid username or password')

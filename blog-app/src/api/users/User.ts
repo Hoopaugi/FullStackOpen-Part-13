@@ -1,7 +1,6 @@
-import { Table, Model, Column, Unique, Scopes, DefaultScope, IsEmail, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Table, Model, Column, Unique, Scopes, DefaultScope, IsEmail, HasMany } from 'sequelize-typescript';
 
 import Blog from '../blogs/Blog';
-import Readinglist from '../readinglist/Readinglist';
 import { IUserAttributes, IUserCreationAttributes } from './users.types';
 
 @DefaultScope(() => ({
@@ -11,12 +10,12 @@ import { IUserAttributes, IUserCreationAttributes } from './users.types';
 @Scopes(() => ({
   full: {
     attributes: {
-      include: ['password_hash']
+      include: ['passwordHash']
     }
   }
 }))
 
-@Table
+@Table({ tableName: 'users' })
 class User extends Model<IUserAttributes, IUserCreationAttributes> {
   @Unique
   @IsEmail
@@ -27,15 +26,11 @@ class User extends Model<IUserAttributes, IUserCreationAttributes> {
   name!: string;
 
   @Column
-  password_hash!: string;
+  passwordHash!: string;
 
   // Blog
-  @HasMany(() => Blog, 'userId')
+  @HasMany(() => Blog)
   blogs!: Blog[]
-
-  // Readinglist
-  @BelongsToMany(() => Blog, () => Readinglist, 'userId')
-  readings!: Blog[]
 }
 
 export default User

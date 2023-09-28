@@ -11,8 +11,12 @@ const getAll = async (req: Request, res: Response) => {
 }
 
 const getByUsername = async (req: RequestWithUser, res: Response) => {
-  if (req.user) {
-    res.json(req.user);
+  const username = parseUsername(req.params.username)
+
+  const user = await usersServices.getByUsername(username)
+
+  if (user) {
+    res.json(user);
   } else {
     res.status(404).end()
   }
@@ -27,7 +31,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
     // FIXME: Bandaid to strip passwordHash from return
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password_hash: _, ...returnedUser } = user.toJSON()
+    const { passwordHash: _, ...returnedUser } = user.toJSON()
 
     return res.status(201).json(returnedUser)
   } catch (error) {

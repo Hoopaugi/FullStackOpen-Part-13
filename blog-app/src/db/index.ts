@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import { Umzug, SequelizeStorage } from "umzug";
 
 import { DATABASE_URL, NODE_ENV } from "../config";
 import Blog from "../api/blogs/Blog";
@@ -25,6 +26,23 @@ if (NODE_ENV === 'test') {
   sequelize = new Sequelize(DATABASE_URL);
 }
 
+const runMigrations = async () => {
+  const migrator = new Umzug({
+    migrations: {
+      glob: 'src/db/migrations/*.js'
+    },
+    storage: new SequelizeStorage({ sequelize, tableName: 'migrations' }),
+    context: sequelize.getQueryInterface(),
+    logger: console
+  })
+  
+  const migrations = await migrator.up()
+
+  console.log('Migrations up to date', {
+    files: migrations.map((mig) => mig.name),
+  })
+}
+
 const connect = async () => {
   try {
     await sequelize.authenticate()
@@ -33,12 +51,14 @@ const connect = async () => {
       console.log('[Server] Connected to the database')
     }
 
-    sequelize.addModels([Blog, User, Readinglist])
+    sequelize.addModels([Blog, User])
 
-    await sequelize.sync()
+    //await sequelize.sync()
+
+    await runMigrations()
   } catch (err) {
     console.log('[Server] Failed to connect to the database')
-
+    console.log(err)
     return process.exit(1)
   }
 }

@@ -1,10 +1,9 @@
-import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max, BelongsToMany } from 'sequelize-typescript';
+import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max } from 'sequelize-typescript';
 
 import User from '../users/User';
-import Readinglist from '../readinglist/Readinglist';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
 
-@Table
+@Table({ tableName: 'blogs' })
 class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
   @Column
   author!: string;
@@ -30,9 +29,6 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
 
   @BelongsTo(() => User, 'userId')
   user!: User
-
-  @BelongsToMany(() => User, () => Readinglist)
-  readers!: User[]
 }
 
 export default Blog

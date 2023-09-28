@@ -1,17 +1,17 @@
 import app from "./app";
 import db from "./db";
 import { PORT, NODE_ENV } from "./config";
-import { seedDatabase } from "./db/utils";
+//import { seedDatabase } from "./db/utils";
 
 const start = async () => {
   await db.connect()
 
   if(NODE_ENV === 'development') {
-    await db.drop()
+    //await db.drop()
 
-    await db.sync()
+    //await db.sync()
 
-    await seedDatabase()
+    //await seedDatabase()
   }
 
   app.listen(PORT, () => {

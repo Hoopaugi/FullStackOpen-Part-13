@@ -12,9 +12,8 @@ export interface IUserAttributes {
   id: number
   username: string
   name: string
-  password_hash: string
-  blogs: Blog[],
-  readings: Blog[]
+  passwordHash: string
+  blogs: Blog[]
 }
 
 export interface IUserCreationAttributes extends Optional<IUserAttributes, 'id'> {}

@@ -6,7 +6,7 @@ import { userFinder } from './users.middlewares'
 const router = express.Router()
 
 router.get('/', handlers.getAll)
-router.get('/:username', userFinder, handlers.getByUsername)
+router.get('/:username', handlers.getByUsername)
 router.post('/', handlers.create)
 router.put('/:username', userFinder, handlers.update)
 

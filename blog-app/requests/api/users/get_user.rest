@@ -1,1 +1,1 @@
-GET http://localhost:5000/api/users/tester@example.com
+GET http://localhost:5000/api/users/tester@example.com?read=true
