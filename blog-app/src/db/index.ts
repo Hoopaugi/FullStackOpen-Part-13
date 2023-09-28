@@ -8,7 +8,15 @@ import User from "../api/users/User";
 export let sequelize: Sequelize
 
 if (NODE_ENV === 'test') {
-  sequelize = new Sequelize('sqlite::memory:', { logging: false });
+  sequelize = new Sequelize(
+    'sqlite::memory:',
+    {
+      logging: false,
+      dialectOptions: {
+        decimalNumbers: true
+      }
+    }
+  );
 } else if (!DATABASE_URL) {
   throw new Error('DATABASE_URL missing from ENV')
 } else {
