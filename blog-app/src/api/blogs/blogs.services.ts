@@ -1,4 +1,4 @@
-import { Op, WhereOptions, Order } from "sequelize"
+import { Op, WhereOptions } from "sequelize"
 
 import User from "../users/User"
 import Blog from "./Blog"

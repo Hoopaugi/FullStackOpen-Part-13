@@ -2,10 +2,7 @@ import request from 'supertest'
 
 import app from "../../app";
 import db from '../../db';
-import { seedDatabase, initialBlogs, initialUsers, initialUser } from '../../db/utils';
-import authServices from '../../auth/auth.services';
-
-let token: string
+import { seedDatabase } from '../../db/utils';
 
 beforeAll(async () => {
   await db.connect()
@@ -13,12 +10,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await seedDatabase()
-
-  const credentials = { username: initialUsers[0].username, password: initialUsers[0].password }
-
-  const payload = await authServices.login(credentials)
-
-  token = payload.token
 })
 
 afterEach(async () => {

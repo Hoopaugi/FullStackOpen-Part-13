@@ -81,7 +81,7 @@ describe("GET /api/blogs", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toEqual(initialBlogs.length);
 
-    let blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
+    let blogLikes = res.body.map((blog: {likes: number}) => blog.likes)
 
     expect(blogLikes).toEqual(initialBlogsLikes)
 
@@ -90,7 +90,7 @@ describe("GET /api/blogs", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toEqual(initialBlogs.length);
 
-    blogLikes = res.body.map((blog: {likes: Number}) => blog.likes)
+    blogLikes = res.body.map((blog: {likes: number}) => blog.likes)
 
     expect(blogLikes).toEqual(initialBlogsLikesSorted)
   });

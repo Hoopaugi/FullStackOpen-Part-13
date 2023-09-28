@@ -8,7 +8,7 @@ const getAll = async () => {
   return users
 }
 
-const getById = async (id: string, includeHash: Boolean = false) => {
+const getById = async (id: string, includeHash: boolean = false) => {
   let user
 
   if (includeHash) {
@@ -20,7 +20,7 @@ const getById = async (id: string, includeHash: Boolean = false) => {
   return user
 }
 
-const getByUsername = async (username: string, includeHash: Boolean = false) => {
+const getByUsername = async (username: string, includeHash: boolean = false) => {
   let user
 
   if (includeHash) {

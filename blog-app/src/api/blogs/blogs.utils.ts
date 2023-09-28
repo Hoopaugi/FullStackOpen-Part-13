@@ -1,4 +1,3 @@
-import User from "../users/User";
 import { isString, isNumber } from "../../utils"
 import { IBlogCreationAttributes } from "./blogs.types"
 

@@ -26,6 +26,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     const user = await usersServices.create(newUser)
 
     // FIXME: Bandaid to strip passwordHash from return
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { passwordHash: _, ...returnedUser } = user.toJSON()
 
     return res.status(201).json(returnedUser)
