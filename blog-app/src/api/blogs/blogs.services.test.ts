@@ -2,10 +2,6 @@ import db from "../../db"
 import blogsServices from "./blogs.services";
 import { initialUser, seedDatabase, initialBlogs } from "../../db/utils";
 
-beforeAll(async () => {
-  await db.connect()
-})
-
 beforeEach(async () => {
   await seedDatabase()
 })

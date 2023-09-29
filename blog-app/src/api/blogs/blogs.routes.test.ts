@@ -7,10 +7,6 @@ import authServices from '../../auth/auth.services';
 
 let token: string
 
-beforeAll(async () => {
-  await db.connect()
-})
-
 beforeEach(async () => {
   await seedDatabase()
 

@@ -3,10 +3,6 @@ import authServices from "./auth.services";
 
 import { initialUsers, seedDatabase } from "../db/utils";
 
-beforeAll(async () => {
-  await db.connect()
-})
-
 beforeEach(async () => {
   await seedDatabase()
 })

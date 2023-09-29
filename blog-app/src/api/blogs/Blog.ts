@@ -3,7 +3,9 @@ import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max } from '
 import User from '../users/User';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
 
-@Table({ tableName: 'blogs' })
+@Table({
+  underscored: true,
+})
 class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
   @Column
   author!: string;
@@ -27,7 +29,7 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
   @Column
   userId!: number
 
-  @BelongsTo(() => User, 'userId')
+  @BelongsTo(() => User)
   user!: User
 }
 

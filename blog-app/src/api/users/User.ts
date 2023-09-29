@@ -10,12 +10,14 @@ import { IUserAttributes, IUserCreationAttributes } from './users.types';
 @Scopes(() => ({
   full: {
     attributes: {
-      include: ['passwordHash']
+      include: ['password_hash']
     }
   }
 }))
 
-@Table({ tableName: 'users' })
+@Table({
+  underscored: true,
+})
 class User extends Model<IUserAttributes, IUserCreationAttributes> {
   @Unique
   @IsEmail
