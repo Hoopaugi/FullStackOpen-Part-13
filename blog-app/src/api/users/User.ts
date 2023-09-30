@@ -4,11 +4,11 @@ import Blog from '../blogs/Blog';
 import { IUserAttributes, IUserCreationAttributes } from './users.types';
 
 @DefaultScope(() => ({
-  attributes: ['id', 'username', 'name'],
+  attributes: { exclude: ['passwordHash', 'createdAt', 'updatedAt'] },
 }))
 
 @Scopes(() => ({
-  full: {
+  sensitive: {
     attributes: {
       include: ['password_hash']
     }

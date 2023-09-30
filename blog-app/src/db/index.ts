@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize-typescript";
 import { DATABASE_URL, NODE_ENV } from "../config";
 import Blog from "../api/blogs/Blog";
 import User from "../api/users/User";
+import ReadingListItem from "../api/readingListItems/ReadingListItem";
 
 export let sequelize: Sequelize
 
@@ -36,7 +37,7 @@ const connect = async () => {
       console.log('[Server] Connected to the database')
     }
 
-    sequelize.addModels([Blog, User])
+    sequelize.addModels([Blog, User, ReadingListItem])
 
     const migrations = await migrator.up()
 

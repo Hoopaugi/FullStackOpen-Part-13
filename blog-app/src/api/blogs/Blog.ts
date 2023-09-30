@@ -1,7 +1,17 @@
-import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max } from 'sequelize-typescript';
+import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max, DefaultScope } from 'sequelize-typescript';
 
 import User from '../users/User';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
+
+@DefaultScope(() => ({
+  attributes: { exclude: ['createdAt', 'updatedAt'] },
+  include: [
+    {
+      model: User,
+      as: 'user'
+    }
+  ]
+}))
 
 @Table({
   underscored: true,

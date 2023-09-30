@@ -1,4 +1,4 @@
-POST http://localhost:5000/api/readinglists
+POST http://localhost:5000/api/readingListItems
 Content-Type: application/json
 
 {

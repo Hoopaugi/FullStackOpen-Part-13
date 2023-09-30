@@ -1,7 +1,7 @@
 import User from "../users/User"
 import Blog from "../blogs/Blog"
 
-export const toNewReadinglist = (blog: Blog, user: User) => {
+export const toNewReadingListItem = (blog: Blog, user: User) => {
   return {
     userId: user.id,
     blogId: blog.id,

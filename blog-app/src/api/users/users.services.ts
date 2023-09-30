@@ -3,7 +3,16 @@ import Blog from "../blogs/Blog"
 import { IUserCreationAttributes } from "./users.types"
 
 const getAll = async () => {
-  const users = await User.findAll({ include: ['blogs'] })
+  const users = await User.findAll({
+    attributes: { exclude: ['id'] },
+    include: [
+      {
+        model: Blog,
+        as: 'blogs',
+        attributes: { exclude: ['userId', 'createdAt', 'updatedAt'] }
+      }
+    ]
+  })
 
   return users
 }
@@ -12,7 +21,7 @@ const getById = async (id: string, includeHash: boolean = false) => {
   let user
 
   if (includeHash) {
-    user = await User.scope('full').findByPk(id, { include: ['blogs'] })
+    user = await User.scope('sensitive').findByPk(id, { include: ['blogs'] })
   } else {
     user = await User.findByPk(id, { include: ['blogs'] })
   }
@@ -24,24 +33,11 @@ const getByUsername = async (username: string, includeHash: boolean = false) => 
   let user
 
   if (includeHash) {
-    user = await User.scope('full').findOne({ where: { username }, include: ['blogs'] })
+    user = await User.scope('sensitive').findOne({ where: { username }, include: ['blogs'] })
   } else {
     user = await User.findOne({
       where: { username },
-      include: [
-        'blogs',
-        {
-          model: Blog,
-          as: 'readings',
-          attributes: [
-            'id',
-            'url',
-            'title',
-            'likes',
-            'published',
-          ]
-        }
-      ]
+      include: ['blogs']
     })
   }
 
