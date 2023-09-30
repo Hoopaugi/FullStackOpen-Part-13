@@ -14,6 +14,7 @@ export interface IUserAttributes {
   name: string
   passwordHash: string
   blogs: Blog[]
+  disabled: boolean
 }
 
-export interface IUserCreationAttributes extends Optional<IUserAttributes, 'id'> {}
+export interface IUserCreationAttributes extends Optional<IUserAttributes, 'id' | 'disabled'> {}

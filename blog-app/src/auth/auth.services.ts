@@ -13,6 +13,10 @@ const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
     throw new Error('Invalid username or password')
   }
 
+  if(user.disabled) {
+    throw new Error('Account disabled')
+  }
+
   const passwordCorrect = await comparePassword(password, user.passwordHash)
 
   if (!passwordCorrect) {
@@ -35,4 +39,18 @@ const login = async (credentials: ICredentials): Promise<IAuthPayload> => {
   return payload
 }
 
-export default { login }
+const disable = async (userId: string) => {
+  const user = await usersServices.getById(userId)
+
+  if (!user) {
+    throw new Error('Invalid username or password')
+  }
+
+  user.disabled = !user.disabled
+
+  await user.save()
+
+  return user.disabled
+}
+
+export default { login, disable }

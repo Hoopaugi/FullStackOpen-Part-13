@@ -14,4 +14,20 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export default { login }
+const disable = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.params.id
+
+    const disabled = await authServices.disable(userId)
+
+    if (disabled) {
+      res.status(200).send({message: 'Account has been disabled'})
+    } else {
+      res.status(200).send({message: 'Account has been enabled'})
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export default { login, disable }

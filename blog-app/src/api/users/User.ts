@@ -31,6 +31,9 @@ class User extends Model<IUserAttributes, IUserCreationAttributes> {
   @Column
   passwordHash!: string;
 
+  @Column
+  disabled!: boolean;
+
   // Blog
   @HasMany(() => Blog)
   blogs!: Blog[]

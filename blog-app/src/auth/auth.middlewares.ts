@@ -29,6 +29,12 @@ export const authenticatedUserExtractor = async (req: RequestWithAuthorizedUser,
     return next()
   }
 
+  if(user.disabled) {
+    const err = new Error('Account is disabled')
+
+    next(err)
+  }
+
   req.authorizedUser = user
 
   next()
