@@ -1,6 +1,7 @@
-import { Table, Model, Column, Unique, Scopes, DefaultScope, IsEmail, HasMany } from 'sequelize-typescript';
+import { Table, Model, Column, Unique, Scopes, DefaultScope, IsEmail, HasMany, BelongsToMany } from 'sequelize-typescript';
 
 import Blog from '../blogs/Blog';
+import ReadingListItem from '../readingListItems/ReadingListItem';
 import { IUserAttributes, IUserCreationAttributes } from './users.types';
 
 @DefaultScope(() => ({
@@ -33,6 +34,9 @@ class User extends Model<IUserAttributes, IUserCreationAttributes> {
   // Blog
   @HasMany(() => Blog)
   blogs!: Blog[]
+
+  @BelongsToMany(() => Blog, () => ReadingListItem)
+  readings!: Blog[];
 }
 
 export default User

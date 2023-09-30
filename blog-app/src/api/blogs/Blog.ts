@@ -1,6 +1,7 @@
-import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max, DefaultScope } from 'sequelize-typescript';
+import { Table, Model, Column, Default, BelongsTo, ForeignKey, Min, Max, DefaultScope, BelongsToMany } from 'sequelize-typescript';
 
 import User from '../users/User';
+import ReadingListItem from '../readingListItems/ReadingListItem';
 import { IBlogAttributes, IBlogCreationAttributes } from './blogs.types';
 
 @DefaultScope(() => ({
@@ -41,6 +42,9 @@ class Blog extends Model<IBlogAttributes, IBlogCreationAttributes> {
 
   @BelongsTo(() => User)
   user!: User
+
+  @BelongsToMany(() => User, () => ReadingListItem)
+  readingLists!: User[];
 }
 
 export default Blog

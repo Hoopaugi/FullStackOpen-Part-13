@@ -2,7 +2,7 @@ import ReadingListItem from "./ReadingListItem"
 import { IReadingListItemCreationAttributes } from "./readingListItems.types"
 
 const getAll = async () => {
-  const readingListItems = await ReadingListItem.findAll({})
+  const readingListItems = await ReadingListItem.findAll({ attributes: { include: ['id'] } })
 
   return readingListItems
 }

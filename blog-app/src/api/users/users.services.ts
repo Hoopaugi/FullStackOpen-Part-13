@@ -37,7 +37,27 @@ const getByUsername = async (username: string, includeHash: boolean = false) => 
   } else {
     user = await User.findOne({
       where: { username },
-      include: ['blogs']
+      attributes: {exclude: ['id']},
+      include: [
+        {
+          model: Blog,
+          as: 'blogs',
+          attributes: {
+            exclude: [
+              'userId',
+              'createdAt',
+              'updatedAt'
+            ]
+          }
+        },
+        {
+          model: Blog,
+          as: 'readings',
+          attributes: {
+            exclude: ['id', 'userId', 'createdAt', 'updatedAt']
+          }
+        }  
+      ]
     })
   }
 
